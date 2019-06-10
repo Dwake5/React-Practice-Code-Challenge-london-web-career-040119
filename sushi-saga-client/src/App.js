@@ -10,6 +10,7 @@ class App extends Component {
     sushis: [],
     sushiEaten: [],
     money: 100,
+    page: 1
   }
 
   fetchSushis =() => {
@@ -22,10 +23,16 @@ class App extends Component {
     this.fetchSushis()
   }
 
+  filterSushis = () => {
+    let startIndex = ((this.state.page-1)*4)
+    return this.state.sushis.slice(startIndex, startIndex+4)
+  }
+
+
   render() {
     return (
       <div className="app">
-        <SushiContainer sushis={this.state.sushis}/>
+        <SushiContainer sushis={this.filterSushis()}/>
         <Table money={this.state.money}/>
       </div>
     );
