@@ -34,7 +34,14 @@ class App extends Component {
 
   moreHandler = () => {
     this.setState({
-      page: this.state.page + 1
+      page: this.state.page === (this.state.sushis.length/4) ? 1 : this.state.page + 1
+    });
+    
+  };
+
+  moreMoney = () => {
+    this.setState({
+      money: this.state.money + 50
     });
   };
 
@@ -60,11 +67,14 @@ class App extends Component {
     return (
       <div className="app">
         <SushiContainer
+          moreMoney={this.moreMoney}
           moreHandler={this.moreHandler}
           clickHandler={this.clickHandler}
           sushis={this.filterSushis()}
         />
+        
         <Table money={this.state.money} eatenSushis={this.getEatenSushis()} />
+        
       </div>
     );
   }
